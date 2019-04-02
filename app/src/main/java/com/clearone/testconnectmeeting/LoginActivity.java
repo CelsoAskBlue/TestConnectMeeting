@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -42,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     View _progressView;
     SptCallID _callID;
     SptSchMeetingSequenceID _tokenSequenceID;
+    Snackbar _snackbar;
 
     ISptIMSDK _sdk;
     TestConnectSptCallObserver _callObserver;
@@ -196,15 +198,31 @@ public class LoginActivity extends AppCompatActivity {
                                 _sdk.loginWithTokenDataResult(tokenDataRes);
                             break;
                         case SptTokenDataResultInvalidToken:
-                            _tokenView.setError("Invalid Token");
+
+                            _snackbar.make(findViewById(R.id.LoginConstraitLayout), R.string.token_error,
+                                    _snackbar.LENGTH_SHORT)
+                                    .show();
+
+                            //showToast("teste");
+                           // _tokenView.setError("Invalid Token");
                             _progressView.setVisibility(View.GONE);
+                            _sdk.loginWithTokenDataResult(tokenDataRes);
                             break;
                         case SptTokenDataResultServerNotReachable:
-                            _passwordView.setError("Server Not Reachable");
+                            _snackbar.make(findViewById(R.id.LoginConstraitLayout), R.string.server_error,
+                                    _snackbar.LENGTH_SHORT)
+                                    .show();
+                           // _passwordView.setError("Server Not Reachable");
                             _progressView.setVisibility(View.GONE);
+                            _sdk.loginWithTokenDataResult(tokenDataRes);
                             break;
                         case SptTokenDataResultError:
-                            showToast("SptTokenDataResultError");
+                            _snackbar.make(findViewById(R.id.LoginConstraitLayout), R.string.spt_error,
+                                    _snackbar.LENGTH_SHORT)
+                                    .show();
+
+                            //showToast("SptTokenDataResultError");
+                            _sdk.loginWithTokenDataResult(tokenDataRes);
                             break;
                     }
 

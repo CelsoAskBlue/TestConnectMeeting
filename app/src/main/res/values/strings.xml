@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Dubai Courts</string>
     <string name="sharing_option_gallery_label">Share Media from Gallery</string>
+    <string name="token_error">Invalid Token</string>
+    <string name="server_error"> Server Not Reachable</string>
+    <string name="spt_error"> SptTokenDataResultError</string>
+
 </resources>
